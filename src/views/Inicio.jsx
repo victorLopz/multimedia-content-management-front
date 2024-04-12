@@ -10,9 +10,9 @@ function Main() {
   const [loading, setLoading] = useState(true);
 
   const [data, setData] = useState({
-    cantContent: 0,
-    cantThemes: 0,
-    userRegistered: 0
+    cantContent: 67,
+    cantThemes: 9,
+    userRegistered: 10
   });
 
   useEffect(() => {

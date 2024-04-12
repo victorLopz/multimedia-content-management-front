@@ -10,6 +10,7 @@ import { Header } from "../../Header";
 import { GridFooter } from "../../GridFooter";
 import { GridItemsHeader } from "../../GridItemsHeader";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const paramsOfTableAdmin = [
   { name: "Identificador" },
@@ -35,6 +36,17 @@ export const Table = () => {
       const resp = await fetchConToken(
         `themes?search=${paramFiltro}&page=${pageNumber + 1}&limit=${pageSize}`
       );
+
+      if (resp.status === 403) {
+        Swal.fire({
+          title: "Error",
+          text: "Opps, no tienes permisos para acceder a esta sección",
+          icon: "error"
+        }).then(() => {
+          window.location.href = "/admin";
+        });
+      }
+
       const body = await resp.json();
       setTheme(body.themes);
       setLoading(false);

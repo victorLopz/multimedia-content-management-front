@@ -177,6 +177,18 @@ export const AddContent = () => {
     const method = id === "nuevo" ? "POST" : "PUT";
 
     const resp = await fetchConToken(url, payload, method);
+    if (resp.status === 403) {
+      setLoading(false);
+      Swal.fire({
+        title: "Error",
+        text: "No estas autorizado",
+        icon: "error"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/admin");
+        }
+      });
+    }
     const body = await resp.json();
 
     const fileFront = await uploadFiles(images, "front_page_url");

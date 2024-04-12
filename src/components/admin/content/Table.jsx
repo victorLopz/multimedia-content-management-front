@@ -53,7 +53,6 @@ export const Table = () => {
     setPageNumber(selected);
   };
 
-
   const options = {
     year: "numeric",
     month: "long",
@@ -87,7 +86,7 @@ export const Table = () => {
         respStore={respStore}
         setRespStore={setRespStore}
         showFilter={true}
-        showButton={true}
+        showButton={Access.role[0] === "Admin" ? true : false}
       />
       {loading ? (
         <SpinnerLoading />

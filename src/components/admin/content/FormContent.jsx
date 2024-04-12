@@ -54,6 +54,18 @@ export const FormContent = ({ id, esNuevo }) => {
     const method = esNuevo ? "POST" : "PUT";
 
     const resp = await fetchConToken(url, data, method);
+    if (resp.status === 403) {
+      setLoading(false);
+      Swal.fire({
+        title: "Error",
+        text: "No estas autorizado",
+        icon: "error"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/admin");
+        }
+      });
+    }
 
     setLoading(false);
 
